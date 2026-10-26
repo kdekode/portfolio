@@ -1,19 +1,25 @@
+import ScrollEffect from "@/components/ScrollEffect"; // Ajusta la ruta si es necesario
+
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { DM_Sans, Raleway } from "next/font/google";
 import 'normalize.css/normalize.css'
 import "./globals.scss";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Configuración de DM Sans
+const dmSans = DM_Sans({
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-dm-sans", // Variable CSS
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// Configuración de Raleway
+const raleway = Raleway({
   subsets: ["latin"],
+  weight: ["400", "600", "800"],
+  variable: "--font-raleway", // Variable CSS
 });
 
 export const metadata: Metadata = {
@@ -23,13 +29,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="es" className={`${dmSans.variable} ${raleway.variable}`}>
       <body className="layout_body">
-        <Header />
-        <main className="layout_main">
-          {children}
-        </main>
-        <Footer />
+        <div className="layout_wrap">
+          <ScrollEffect />
+          <Header />
+          <main className="layout_main">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

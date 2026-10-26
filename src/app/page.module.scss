@@ -1,1 +1,26 @@
 @use "@/styles" as *;
+
+.section_v3 {
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+    margin: auto;
+
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    .section_v3__wrap {
+        width: min(100%, 768px);
+        margin: 0 auto;
+
+        .section_v3__title {
+            font-size: 3rem;
+        }
+
+        .section_v3__txt {
+            font-size: 1.5rem;
+        }
+    }
+}
+

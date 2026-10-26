@@ -1,9 +1,9 @@
-import syles from './Footer.module.scss';
+import styles from './Footer.module.scss';
 
 export default function Footer(){
     return(
-        <footer>
-            <span>Footer</span>
+        <footer className={styles.footer}>
+            <span>@and3r.css</span>
         </footer>
     );
 }

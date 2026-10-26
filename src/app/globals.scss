@@ -1,27 +1,53 @@
 @use "@/styles" as *;
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html, body {
+  box-sizing: border-box;
+
+}
+
 html {
-  font-family: $font;
-  background-color: $color-bg;
+  font-family: var(--font-raleway);
   color: $color-text;
   -webkit-font-smoothing: antialiased;
 }
 
-// Estructura para que el Footer siempre esté al final de la pantalla
-.layout_body {
+body {
+  margin: 0;
+
+  border-radius:25px;
+  display:flex;
+  padding:25px;
+}
+
+.layout_wrap{
+  margin:auto;
+  background-color: #fcfcfc;
+  border-radius:25px;
+  min-height: 94dvh; // Ocupa al menos el 100% del viewport
+
   display: flex;
   flex-direction: column;
-  min-height: 100dvh; // Ocupa al menos el 100% del viewport
+  justify-content: space-between;
+}
+
+// Estructura para que el Footer siempre esté al final de la pantalla
+.layout_body {
+  flex-direction: column;
+  min-height: 100dvh;
 }
 
 .layout_main {
   flex: 1; // Hace que <main> crezca y empuje al Footer hacia abajo si hay poco contenido
+  display: flex;
+  flex-direction: column;
 }
 
 a {
