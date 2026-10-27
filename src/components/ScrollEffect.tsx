@@ -4,53 +4,57 @@ import { useEffect } from 'react';
 
 export default function ScrollEffect() {
   useEffect(() => {
-    // Seleccionamos el body (asegúrate de que tenga la clase .layout-body)
-    const body = document.querySelector('.layout_body');
+    const body = document.querySelector('.layout_body') as HTMLElement | null;
     if (!body) return;
 
-    // Función para generar un color hexadecimal aleatorio
-    const getRandomColor = () => {
-      const letters = '0123456789ABCDEF';
-      let color = '#';
-      for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      return color;
+    const wrap = document.querySelector('.layout_wrap') as HTMLElement | null;
+    if (wrap) {
+      wrap.style.backgroundColor = 'rgba(252, 252, 252, 0.72)';
+    }
+
+    let hue = Math.random() * 360;
+    const hueSpread = 32;
+    const saturation = 82;
+    const lightness = 58;
+    const alpha = 0.92;
+    const idleSpeed = 5;
+    const maxSpeed = 16;
+
+    let speed = idleSpeed;
+    let frameId = 0;
+    let lastTime = performance.now();
+
+    const paint = (now: number) => {
+      const dt = Math.min((now - lastTime) / 1000, 0.05);
+      lastTime = now;
+
+      hue = (hue + speed * dt) % 360;
+      speed += (idleSpeed - speed) * Math.min(dt * 2.4, 1);
+
+      const color1 = `hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})`;
+      const color2 = `hsla(${(hue + hueSpread) % 360}, ${saturation}%, ${lightness}%, ${alpha})`;
+      body.style.background = `linear-gradient(135deg, ${color1}, ${color2})`;
+
+      frameId = requestAnimationFrame(paint);
     };
 
-    // Función que cambia el fondo con un gradiente aleatorio
-    const changeGradient = () => {
-      const color1 = getRandomColor();
-      const color2 = getRandomColor();
-      
-      // Aplicamos una transición suave y el nuevo gradiente
-      (body as HTMLElement).style.transition = 'background 0.5s ease';
-      (body as HTMLElement).style.background = `linear-gradient(135deg, ${color1}, ${color2})`;
+    const boost = () => {
+      speed = Math.min(speed + 10, maxSpeed);
     };
 
-    // 3. El setInterval que cambia los colores constantemente
-    const intervalId = setInterval(() => {
-      // Generamos NUEVOS colores en cada ciclo dentro del intervalo
-      const color1 = getRandomColor();
-      const color2 = getRandomColor();
+    frameId = requestAnimationFrame(paint);
+    window.addEventListener('scroll', boost, { passive: true });
+    window.addEventListener('wheel', boost, { passive: true });
 
-      (body as HTMLElement).style.transition = 'background 0.5s ease';
-      (body as HTMLElement).style.background = `linear-gradient(135deg, ${color1}, ${color2})`;
-    }, 1000); // Cambia cada 1 segundo
-
-    // 1. Evento scroll (cuando la página se mueve de verdad)
-    window.addEventListener('scroll', changeGradient);
-
-    // 2. Evento wheel (detecta el giro de la rueda aunque no haya scroll en la página)
-    window.addEventListener('wheel', changeGradient);
-
-    // Limpieza de eventos al desmontar el componente
     return () => {
-      window.removeEventListener('scroll', changeGradient);
-      window.removeEventListener('wheel', changeGradient);
-      clearInterval(intervalId);
+      cancelAnimationFrame(frameId);
+      window.removeEventListener('scroll', boost);
+      window.removeEventListener('wheel', boost);
+      if (wrap) {
+        wrap.style.backgroundColor = '';
+      }
     };
   }, []);
 
-  return null; 
+  return null;
 }

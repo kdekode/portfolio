@@ -8,7 +8,7 @@ export default function Header(){
             </div>
             <div className={sytles.nav_main}>
                 <ul className={sytles.nav_main__ul}>
-                    <li><a href="#">Sobre mi</a></li>
+                  
                     <li>Portfolio
                         <ul className={sytles.nav_main__submenu}>
                             <li><a href="#">Premios Alfonso X</a></li>
@@ -16,6 +16,18 @@ export default function Header(){
                             <li><a href="#">Cuorepilates.com</a></li>
                             <li><a href="#">Ventabanos.com</a></li>
                             <li><a href="#">60b0.com</a></li>
+                        </ul>
+
+                        <ul className={sytles.nav_main__submenu}>
+                            <li>Skill</li>
+                            <li>PHP</li>
+                            <li>WordPress</li>
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>JavaScript</li>
+                            <li>React</li>
+                            <li>Node.js</li>
+                            <li>Next JS</li>
                         </ul>
                     </li>
 

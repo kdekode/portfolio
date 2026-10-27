@@ -31,17 +31,18 @@ body {
   margin:auto;
   background-color: #fcfcfc;
   border-radius:25px;
-  min-height: 94dvh; // Ocupa al menos el 100% del viewport
-
+  min-height: 94dvh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  position: relative;
 }
 
 // Estructura para que el Footer siempre esté al final de la pantalla
 .layout_body {
   flex-direction: column;
-  min-height: 100dvh;
+
 }
 
 .layout_main {

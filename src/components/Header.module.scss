@@ -6,14 +6,25 @@
     display: flex;
     justify-content: space-between;
 
+
+    position: absolute;
+    width: 100% ;
+
     li{
         list-style: none;
     }
 
     .logo{
         font-family: var(--font-dm-sans);
-        font-size: 1.5rem;
+        font-size: 0.9rem;
         font-weight: 600;
+
+        @include respond-to('sm') {
+            font-size: 1.5rem;
+        }
+
+       
+
     }
 
     .nav_main__ul{
@@ -25,6 +36,15 @@
             text-align: right;
             display: block;
             margin-bottom: 5px;
+            font-size: 0.9rem;
+
+            @include respond-to('sm') {
+                font-size: 1rem;
+            }
+        }
+
+        .nav_main__submenu{
+            margin-bottom: 40px;
         }
 
     }

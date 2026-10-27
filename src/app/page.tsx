@@ -5,6 +5,9 @@ export default function Home() {
     <>
     <section className={styles.section_v3}>
       <div className={styles.section_v3__wrap}>
+
+        <img src="/img/steevand3rson.jpeg" alt="Steev Anderson" className={styles.section_v3__img} />
+
         <h1 className={styles.section_v3__title}>Hola mundo.</h1>
         <p className={styles.section_v3__txt}>
           Desarrollador Front-End & WordPress especializado 
